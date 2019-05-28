@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('/make-payment/{student_id}', 'PaymentsController@store');
 Route::post('/students/{id}/change-pic', 'StudentsController@changePic');
 Route::resource('students', 'StudentsController');
 Route::resource('groups', 'GroupsController');

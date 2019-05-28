@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\School;
 use App\Student;
+use App\Payment;
 
 class StudentsController extends Controller
 {
@@ -65,6 +66,7 @@ class StudentsController extends Controller
     public function show($id)
     {
         $student = Student::find($id);
+        $payments = Payment::where('student_id', $id)->get();
         $pic;
         if($student->profile_pic){
             $pic = $student->profile_pic;
@@ -77,6 +79,7 @@ class StudentsController extends Controller
         }
         return view('students.show')
             ->with('student', $student)
+            ->with('payments', $payments)
             ->with('pic', $pic);
     }
 
@@ -103,15 +106,13 @@ class StudentsController extends Controller
 
         $student = Student::find($id);
 
-        if($student) {
-            $filename = $student->id.'_profpic'.time().'.'.request()->profile_pic->getClientOriginalExtension();
+        $filename = $student->id.'_profpic'.time().'.'.request()->profile_pic->getClientOriginalExtension();
 
-            Storage::disk('public')->put('profilepics/'.$filename, file_get_contents($request->profile_pic), 'public');
+        Storage::disk('public')->put('profilepics/'.$filename, file_get_contents($request->profile_pic), 'public');
 
-            $student->profile_pic = $filename;
-            $student->save();
-        }
+        $student->profile_pic = $filename;
+        $student->save();
 
-        return 123;
+        return redirect('/students/'.$id)->with('success', 'Profile Pic updated!');
     }
 }
