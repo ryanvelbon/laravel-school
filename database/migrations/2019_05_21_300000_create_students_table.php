@@ -25,6 +25,7 @@ class CreateStudentsTable extends Migration
             $table->string('email2');
             $table->string('mob1');
             $table->string('mob2');
+            $table->string('profile_pic')->nullable();
             $table->timestamps();
         });
     }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+
 use App\School;
 use App\Student;
 
@@ -62,7 +65,19 @@ class StudentsController extends Controller
     public function show($id)
     {
         $student = Student::find($id);
-        return view('students.show')->with('student', $student);
+        $pic;
+        if($student->profile_pic){
+            $pic = $student->profile_pic;
+        }else{
+            if($student->sex == 0){
+                $pic = "m.jpg";
+            }else{
+                $pic = "f.jpg";
+            }
+        }
+        return view('students.show')
+            ->with('student', $student)
+            ->with('pic', $pic);
     }
 
     public function edit($id)
@@ -78,5 +93,25 @@ class StudentsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changePic(Request $request, $id)
+    {
+        $this->validate($request, [
+            'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $student = Student::find($id);
+
+        if($student) {
+            $filename = $student->id.'_profpic'.time().'.'.request()->profile_pic->getClientOriginalExtension();
+
+            Storage::disk('public')->put('profilepics/'.$filename, file_get_contents($request->profile_pic), 'public');
+
+            $student->profile_pic = $filename;
+            $student->save();
+        }
+
+        return 123;
     }
 }

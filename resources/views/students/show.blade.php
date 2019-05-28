@@ -2,7 +2,6 @@
 
 @section('content')
 	<a class="btn btn-default" href="/">Go Back</a>
-	<h1>{{$student->first_name}} {{$student->last_name}}</h1>
 	<hr>
 	<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -19,9 +18,19 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="panel panel-default">
-					<div class="panel-heading"><h3>Bio</h3></div>
+					<div class="panel-heading"><h1>{{$student->first_name}} {{$student->last_name}}</h1></div>
 					<div class="panel-body">
-						bio details
+						<img height="200" width="200" src="{{asset('storage/profilepics/').'/'.$pic}}">
+						<form 
+							name="change-pic" 
+							method="post" 
+							action="{{ action('StudentsController@changePic', ['id' => $student->id]) }}" 
+							enctype="multipart/form-data">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<input type="file" name="profile_pic" id="profile_pic">
+							<!-- <input type="hidden" name="_method" value="put" /> -->
+							<input type="submit" value="Submit">
+						</form>
 					</div>
 				</div>
 			</div>
