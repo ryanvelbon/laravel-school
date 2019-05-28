@@ -42,3 +42,20 @@ $factory->define(App\Student::class, function (Faker\Generator $faker) {
         'mob2' => "99" . sprintf('%06d', random_int(0,999999)), // Find DRY solution
     ];
 });
+
+$factory->define(App\Group::class, function (Faker\Generator $faker) {
+    
+    $weekdays = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+    $start_time = 8*60 + random_int(0, 20)*30;
+
+    return [
+        'custom_id' => chr(64+rand(0,26))."".chr(64+rand(0,26)),
+        'subject_id' => App\Subject::inRandomOrder()->first()->id,
+        'level_id' => App\SubjectLevel::inRandomOrder()->first()->id,
+        'tutor_id' => App\Tutor::inRandomOrder()->first()->id,
+        'classroom_id' => App\Classroom::inRandomOrder()->first()->id,
+        'weekday' => $weekdays[random_int(0, 5)],
+        'start_time' => $start_time,
+        'end_time' => $start_time + 60 + random_int(0, 4)*30,
+    ];
+});
