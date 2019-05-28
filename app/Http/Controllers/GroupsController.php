@@ -18,7 +18,10 @@ class GroupsController extends Controller
 
     public function index()
     {
-        //
+        $groups = Group::orderBy('custom_id', 'asc')->get();
+
+        return view('groups.index')
+            ->with('groups', $groups);
     }
 
     public function create()
@@ -56,7 +59,10 @@ class GroupsController extends Controller
 
     public function show($id)
     {
-        //
+        $group = Group::find($id);
+        
+        return view('groups.show')
+            ->with('group', $group);
     }
 
     public function edit($id)
