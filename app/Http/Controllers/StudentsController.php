@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\School;
 use App\Student;
 use App\Payment;
+use App\Group;
 
 class StudentsController extends Controller
 {
@@ -67,6 +68,7 @@ class StudentsController extends Controller
     {
         $student = Student::find($id);
         $payments = Payment::where('student_id', $id)->get();
+        $groups_not_part_of = Group::whereNotIn('id', $student->groups->pluck('id'))->get();
         $pic;
         if($student->profile_pic){
             $pic = $student->profile_pic;
@@ -80,6 +82,7 @@ class StudentsController extends Controller
         return view('students.show')
             ->with('student', $student)
             ->with('payments', $payments)
+            ->with('groups_not_part_of', $groups_not_part_of)
             ->with('pic', $pic);
     }
 
@@ -114,5 +117,18 @@ class StudentsController extends Controller
         $student->save();
 
         return redirect('/students/'.$id)->with('success', 'Profile Pic updated!');
+    }
+
+    public function joinGroup(Request $request, $id)
+    {
+        // validation
+
+        $student = Student::find($id);
+
+        $group_id = (int) $request->input('group-to-join');
+
+        $student->groups()->attach($group_id);
+
+        return redirect('/students/'.$id)->with('success', 'Student has enrolled successfully!');
     }
 }

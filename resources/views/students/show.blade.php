@@ -142,7 +142,43 @@
 			<div class="panel panel-default">
 				<div class="panel-heading"><h3>Courses Enrolled For and Attendance</h3></div>
 				<div class="panel-body">
-					
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Group</th>
+								<th>Date Joined</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($student->groups as $group)
+							<tr>
+								<td>{{$group->custom_id}}</td>
+								<td></td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+
+					<div id="groupForm" style="display: none;">
+						<form
+							name="add-group" 
+							method="post" 
+							action="{{ action('StudentsController@joinGroup', ['student_id' => $student->id]) }}">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								
+								<label for="group-to-join">Add {{$student->first_name}} to Group</label>
+								<select class="form-control" name="group-to-join" id="group-to-join">
+									@foreach($groups_not_part_of as $group)
+										<option value="{{$group->id}}">{{$group->custom_id}}</option>
+									@endforeach
+								</select>
+
+								<input type="submit" value="Submit" class="btn btn-primary">
+						</form>
+						
+					</div>
+
+					<a onclick="toggleDisplayOfGroupForm()" class="btn btn-default pull-right" id="joinGroupBtn">Add to New Group</a>
 				</div>
 			</div>
 		</div>
@@ -168,6 +204,22 @@
 			form.style.display = "none";
 			// btn.class = "btn btn-default";
 			btn.innerHTML = "Add a Payment";
+		}
+	}
+
+	function toggleDisplayOfGroupForm() {
+		
+		var form = document.getElementById("groupForm");
+		var btn = document.getElementById("joinGroupBtn");
+
+		if (form.style.display === "none") {
+			form.style.display = "block";
+			// btn.class = "btn btn-danger";
+			btn.innerHTML = "Cancel";
+		} else {
+			form.style.display = "none";
+			// btn.class = "btn btn-default";
+			btn.innerHTML = "Add to Group";
 		}
 	}
 </script>
