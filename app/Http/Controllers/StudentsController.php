@@ -16,13 +16,14 @@ class StudentsController extends Controller
 
     public function index()
     {
-        //
+        $students = Student::orderBy('first_name', 'asc')->get();
+
+        return view('students.index')
+            ->with('students', $students);
     }
 
     public function create()
     {
-        // return 123;
-
         $schools = School::all();
         return view('students.create')
             ->with('schools', $schools);
@@ -60,7 +61,8 @@ class StudentsController extends Controller
 
     public function show($id)
     {
-        //
+        $student = Student::find($id);
+        return view('students.show')->with('student', $student);
     }
 
     public function edit($id)
