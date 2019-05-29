@@ -10,6 +10,7 @@ class CreateSubjectLevelsTable extends Migration
     {
         Schema::create('subject_levels', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('custom_id' , 4)->unique();
             $table->string('title')->unique();
         });
     }

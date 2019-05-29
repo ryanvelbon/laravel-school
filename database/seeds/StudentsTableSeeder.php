@@ -8,6 +8,6 @@ class StudentsTableSeeder extends Seeder
     {
         DB::table('students')->delete();
 
-        $students = factory(App\Student::class, 30)->create();
+        $students = factory(App\Student::class, 100)->create();
     }
 }
