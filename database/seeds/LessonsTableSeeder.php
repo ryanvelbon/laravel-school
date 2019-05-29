@@ -20,7 +20,7 @@ class LessonsTableSeeder extends Seeder
             
             $hour = (int) $group->start_time/60;
             $minute = $group->start_time%60;
-            $datetimeStart = mktime($hour,$minute,0,7,13,2020); // date and time of first lesson
+            $datetimeStart = mktime($hour,$minute,0,7,13+$group->weekday,2020); // date and time of first lesson
 
             for($i=0; $i < $numOfLessons; $i++){
 
