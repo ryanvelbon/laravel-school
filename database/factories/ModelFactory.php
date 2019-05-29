@@ -48,7 +48,7 @@ $factory->define(App\Group::class, function (Faker\Generator $faker) {
     $start_time = 8*60 + random_int(0, 20)*30;
 
     return [
-        'custom_id' => chr(64+rand(0,26))."".chr(64+rand(0,26)),
+        'custom_id' => chr(64+rand(0,26))."".chr(64+rand(0,26))."".chr(64+rand(0,26))."".chr(64+rand(0,26))."".chr(64+rand(0,26))."".chr(64+rand(0,26)), //temp lol
         'subject_id' => App\Subject::inRandomOrder()->first()->id,
         'level_id' => App\SubjectLevel::inRandomOrder()->first()->id,
         'tutor_id' => App\Tutor::inRandomOrder()->first()->id,

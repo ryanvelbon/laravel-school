@@ -21,7 +21,15 @@
 					<div class="panel-heading"><h1>{{$student->first_name}} {{$student->last_name}}</h1></div>
 					<div class="panel-body">
 						<div class="col-sm-6">
-							<img height="200" width="200" src="{{asset('storage/profilepics/').'/'.$pic}}">
+							@if($student->profile_pic)
+								<img height="200" width="200" src="{{asset('storage/profilepics/').'/'.$student->profile_pic}}">
+							@else
+								@if($student->sex)
+									<img height="200" width="200" src="{{asset('storage/profilepics/').'/'.'f.jpg'}}">
+								@else
+									<img height="200" width="200" src="{{asset('storage/profilepics/').'/'.'m.jpg'}}">
+								@endif
+							@endif
 							<form 
 								name="change-pic" 
 								method="post" 

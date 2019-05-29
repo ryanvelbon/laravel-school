@@ -58,7 +58,6 @@ class StudentsController extends Controller
         $student->mob1 = $request->input('mobile-parent');
         $student->mob2 = $request->input('mobile-student');
 
-
         $student->save();
 
         return redirect('/students')->with('success', 'Student Added');
@@ -69,21 +68,11 @@ class StudentsController extends Controller
         $student = Student::find($id);
         $payments = Payment::where('student_id', $id)->get();
         $groups_not_part_of = Group::whereNotIn('id', $student->groups->pluck('id'))->get();
-        $pic;
-        if($student->profile_pic){
-            $pic = $student->profile_pic;
-        }else{
-            if($student->sex == 0){
-                $pic = "m.jpg";
-            }else{
-                $pic = "f.jpg";
-            }
-        }
+
         return view('students.show')
             ->with('student', $student)
             ->with('payments', $payments)
-            ->with('groups_not_part_of', $groups_not_part_of)
-            ->with('pic', $pic);
+            ->with('groups_not_part_of', $groups_not_part_of);
     }
 
     public function edit($id)

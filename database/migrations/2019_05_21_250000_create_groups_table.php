@@ -10,7 +10,7 @@ class CreateGroupsTable extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('custom_id', 3)->unique();
+            $table->string('custom_id', 6)->unique();
 
             $table->unsignedInteger('subject_id');
             $table->unsignedInteger('level_id');
