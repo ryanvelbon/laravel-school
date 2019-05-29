@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/make-payment/{student_id}', 'PaymentsController@store');
+Route::post('/lessons/{id}/update-status', 'LessonsController@updateStatus');
+Route::get('/lessons/{id}/mark-attendance', 'LessonsController@markAttendance');
 Route::post('/students/{id}/change-pic', 'StudentsController@changePic');
 Route::post('/students/{id}/join-group', 'StudentsController@joinGroup');
 Route::resource('students', 'StudentsController');

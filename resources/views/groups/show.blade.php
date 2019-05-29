@@ -14,7 +14,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="panel panel-default">
 					<div class="panel-heading">Students</div>
 					<div class="panel-body">
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-8">
+			<div class="col-sm-9">
 				<div class="panel panel-default">
 					<div class="panel-heading">Lessons</div>
 					<div class="panel-body">
@@ -71,18 +71,37 @@
 									<th>Ends</th>
 									<th>Room</th>
 									<th>Description</th>
+									<th><!--  Status  --></th>
+									<th>Turn-Out</th>
 									<th><!--Edit Buttons--></th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach($group->lessons as $lesson)
-								<tr>
+								<tr @if($lesson->held) class="success" @endif>
 									<td>@php echo date('l', strtotime($lesson->starts)); @endphp</td>
 									<td>@php echo date('M j', strtotime($lesson->starts)); @endphp</td>
 									<td>@php echo date('H:i', strtotime($lesson->starts)); @endphp</td>
 									<td>@php echo date('H:i', strtotime($lesson->ends)); @endphp</td>
 									<td>{{App\Classroom::find($lesson->classroom_id)->room_number}}</td>
 									<td>@php echo  substr($lesson->description, 0, 30); @endphp</td>
+									<td>
+										@if($lesson->held)
+											x
+										@else
+											<form
+												name="lesson-complete" 
+												method="post" 
+												action="{{ action('LessonsController@updateStatus', ['id' => $lesson->id]) }}">
+													<input type="hidden" name="_token" value="{{ csrf_token() }}">
+													<input type="submit" value="Click if Held" class="btn btn-primary">
+											</form>
+										@endif
+									</td>
+									<td>
+										@if($lesson->held)
+											69
+										@endif</td>
 									<td><a href="{{ url('/lessons/'.$lesson->id.'/edit') }}" class="btn btn-default btn-sm">Edit</a></td>
 								</tr>
 								@endforeach

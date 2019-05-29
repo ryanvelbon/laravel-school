@@ -18,6 +18,7 @@ class CreateLessonsTable extends Migration
             $table->dateTime('starts');
             $table->dateTime('ends');
             $table->string('description', 200)->nullable();
+            $table->boolean('held')->default(0);
         });
     }
 
