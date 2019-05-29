@@ -21,7 +21,7 @@ class CreateGroupsTable extends Migration
             $table->foreign('tutor_id')->references('id')->on('tutors');
             $table->foreign('classroom_id')->references('id')->on('classrooms');
 
-            $table->string('weekday', 10);
+            $table->tinyInteger('weekday');
             $table->smallInteger('start_time');
             $table->smallInteger('end_time');
 

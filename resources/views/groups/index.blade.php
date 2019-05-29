@@ -39,7 +39,7 @@
                     <td>{{App\SubjectLevel::find($group->level_id)->title}}</td>
                     <td>{{App\Tutor::find($group->tutor_id)->full_name}}</td>
                     <td>{{App\Classroom::find($group->classroom_id)->room_number}}</td>
-                    <td>{{$group->weekday}}</td>
+                    <td>{{$weekdays[$group->weekday]}}</td>
                     <td>@php echo sprintf('%02d', $group->start_time/60) . ":" . sprintf('%02d', $group->start_time%60); @endphp</td>
                     <td>@php echo sprintf('%02d', $group->end_time/60) . ":" . sprintf('%02d', $group->end_time%60); @endphp</td>
                     <td><a href="{{ url('/groups', $group->id) }}" class="btn btn-success btn-sm">View Group</a></td>

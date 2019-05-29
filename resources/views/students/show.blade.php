@@ -152,7 +152,7 @@
 						<tbody>
 							@foreach($student->groups as $group)
 							<tr>
-								<td>{{$group->custom_id}}</td>
+								<td><a href="{{ url('/groups', $group->id) }}">{{$group->custom_id}}</a></td>
 								<td></td>
 							</tr>
 							@endforeach

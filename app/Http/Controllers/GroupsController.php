@@ -8,6 +8,7 @@ use App\Subject;
 use App\Tutor;
 use App\SubjectLevel;
 use App\Classroom;
+use Illuminate\Support\Facades\Config;
 
 class GroupsController extends Controller
 {
@@ -21,7 +22,8 @@ class GroupsController extends Controller
         $groups = Group::orderBy('custom_id', 'asc')->get();
 
         return view('groups.index')
-            ->with('groups', $groups);
+            ->with('groups', $groups)
+            ->with('weekdays', Config::get('constants.weekdays'));
     }
 
     public function create()
@@ -44,7 +46,7 @@ class GroupsController extends Controller
         $group->subject_id = (int) $request->input('subject');
         $group->level_id = (int) $request->input('subject-level');
         $group->tutor_id = (int) $request->input('tutor');
-        $group->weekday = $request->input('day');
+        $group->weekday = (int) $request->input('day');
         $group->start_time = (int) $request->input('start-time');
         $group->end_time = ((int) $request->input('start-time')) + ((int) $request->input('duration'));
         $group->classroom_id = (int) $request->input('room');
@@ -62,12 +64,13 @@ class GroupsController extends Controller
         $group = Group::find($id);
         
         return view('groups.show')
-            ->with('group', $group);
+            ->with('group', $group)
+            ->with('weekdays', Config::get('constants.weekdays'));
     }
 
     public function edit($id)
     {
-        //
+        // 
     }
 
     public function update(Request $request, $id)

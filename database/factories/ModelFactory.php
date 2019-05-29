@@ -45,7 +45,6 @@ $factory->define(App\Student::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Group::class, function (Faker\Generator $faker) {
     
-    $weekdays = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
     $start_time = 8*60 + random_int(0, 20)*30;
 
     return [
@@ -54,7 +53,7 @@ $factory->define(App\Group::class, function (Faker\Generator $faker) {
         'level_id' => App\SubjectLevel::inRandomOrder()->first()->id,
         'tutor_id' => App\Tutor::inRandomOrder()->first()->id,
         'classroom_id' => App\Classroom::inRandomOrder()->first()->id,
-        'weekday' => $weekdays[random_int(0, 5)],
+        'weekday' => random_int(0, 5),
         'start_time' => $start_time,
         'end_time' => $start_time + 60 + random_int(0, 4)*30,
     ];

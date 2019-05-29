@@ -32,4 +32,8 @@ class Group extends Model
     public function students(){
         return $this->belongsToMany('App\Student');
     }
+
+    public function lessons(){
+        return $this->hasMany('App\Lesson');
+    }
 }
