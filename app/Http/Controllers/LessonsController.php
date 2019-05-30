@@ -19,6 +19,23 @@ class LessonsController extends Controller
     }
 
     public function markAttendance($id){
-    	return 666;
+
+        $lesson = Lesson::find($id);
+
+        return view('lessons.markAttendance')
+            ->with('lesson', $lesson);
+    }
+
+    public function storeAttendance(Request $request, $id){
+
+        $lesson = Lesson::find($id);
+
+        $student_ids = $request->input('student_ids');
+
+        foreach ($student_ids as $student_id) {
+            $lesson->attendees()->attach($student_id);
+        }
+
+        return redirect('/groups/'.$lesson->group_id)->with('success', 'Student has enrolled successfully!');
     }
 }

@@ -15,4 +15,9 @@ class Lesson extends Model
     public function classroom() {
     	return $this->hasOne('App\Classroom');
     }
+
+    // Students who have attended lesson.
+    public function attendees(){
+        return $this->belongsToMany('App\Student', 'attendance');
+    }
 }
