@@ -78,7 +78,18 @@
 							</thead>
 							<tbody>
 								@foreach($group->lessons as $lesson)
-								<tr @if($lesson->held) class="success" @endif>
+								<tr
+								@php
+									$today = date("Y-m-d H:i");
+									if($lesson->starts < $today){
+										if($lesson->held){
+											echo "class='success'";
+										}else{
+											echo "class='danger'";
+										}
+									}
+								@endphp
+								>
 									<td>@php echo date('l', strtotime($lesson->starts)); @endphp</td>
 									<td>@php echo date('M j', strtotime($lesson->starts)); @endphp</td>
 									<td>@php echo date('H:i', strtotime($lesson->starts)); @endphp</td>
