@@ -17,4 +17,8 @@ class Student extends Model
     public function lessonsAttended(){
         return $this->belongsToMany('App\Lesson', 'attendance');
     }
+
+    public function reports() {
+    	return $this->hasMany('App\Report');
+    }
 }

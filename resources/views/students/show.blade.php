@@ -125,7 +125,7 @@
 								action="{{ action('PaymentsController@store', ['id' => $student->id]) }}">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<input type="number" name="amount" id="amount">
-									<input type="date" name="date" id="date">
+									<input type="date" name="payment-date" id="payment-date">
 									<input type="submit" value="Submit" class="btn btn-primary">
 							</form>
 							
@@ -190,6 +190,57 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h3>Reports</h3></div>
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Type</th>
+								<th>Text</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($student->reports as $report)
+							<tr>
+								<td>{{$report->date}}</td>
+								<td>{{App\ReportType::find($report->report_type_id)->title}}</td>
+								<td>{{$report->text}}</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+
+					<div id="reportForm" style="display: none;">
+						<form
+							name="make-report" 
+							method="post" 
+							action="{{ action('StudentsController@receiveReport', ['student_id' => $student->id]) }}">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								
+								<label for="report-type">Report {{$student->first_name}}</label>
+								<select class="form-control" name="report-type" id="report-type">
+									@foreach(App\ReportType::all() as $report_type)
+										<option value="{{$report_type->id}}">{{$report_type->title}}</option>
+									@endforeach
+								</select>
+
+								<input type="text" name="text" id="text">
+
+								<input type="date" name="report-date" id="report-date">
+
+								<input type="submit" value="Submit" class="btn btn-primary">
+						</form>
+						
+					</div>
+
+					<a onclick="toggleDisplayOfReportForm()" class="btn btn-default pull-right" id="makeReportBtn">Make a Report</a>
+				</div>
+			</div>
+		</div>
 	</div>
 
 @endsection
@@ -199,7 +250,7 @@
 	function toggleDisplayOfPaymentForm() {
 
 		// Selects today's date as default
-		document.querySelector("#date").valueAsDate = new Date();
+		document.querySelector("#payment-date").valueAsDate = new Date();
 		
 		var form = document.getElementById("paymentForm");
 		var btn = document.getElementById("addPaymentBtn");
@@ -228,6 +279,25 @@
 			form.style.display = "none";
 			// btn.class = "btn btn-default";
 			btn.innerHTML = "Add to Group";
+		}
+	}
+
+	function toggleDisplayOfReportForm() {
+
+		// Selects today's date as default
+		document.querySelector("#report-date").valueAsDate = new Date();
+		
+		var form = document.getElementById("reportForm");
+		var btn = document.getElementById("makeReportBtn");
+
+		if (form.style.display === "none") {
+			form.style.display = "block";
+			// btn.class = "btn btn-danger";
+			btn.innerHTML = "Cancel";
+		} else {
+			form.style.display = "none";
+			// btn.class = "btn btn-default";
+			btn.innerHTML = "Make Report";
 		}
 	}
 </script>

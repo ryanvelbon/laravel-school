@@ -10,6 +10,7 @@ use App\School;
 use App\Student;
 use App\Payment;
 use App\Group;
+use App\Report;
 
 class StudentsController extends Controller
 {
@@ -119,5 +120,19 @@ class StudentsController extends Controller
         $student->groups()->attach($group_id);
 
         return redirect('/students/'.$id)->with('success', 'Student has enrolled successfully!');
+    }
+
+    public function receiveReport(Request $request, $id)
+    {
+        $report = new Report;
+
+        $report->student_id = $id;
+        $report->report_type_id = (int) $request->input('report-type');
+        $report->text = $request->input('text');
+        $report->date = $request->input('report-date');
+
+        $report->save();
+
+        return redirect('/students/'.$id)->with('success', 'Report has been filed.');
     }
 }

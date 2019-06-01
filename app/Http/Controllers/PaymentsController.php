@@ -20,7 +20,7 @@ class PaymentsController extends Controller
         $payment = new Payment;
         $payment->student_id = $student_id;
         $payment->amount = (int) $request->input('amount'); // is there need to type-cast?
-        $payment->date = $request->input('date');
+        $payment->date = $request->input('payment-date');
 
         $payment->save();
 

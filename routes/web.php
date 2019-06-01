@@ -25,6 +25,7 @@ Route::get('/lessons/{id}/mark-attendance', 'LessonsController@markAttendance');
 Route::post('/lessons/{id}/store-attendance', 'LessonsController@storeAttendance');
 Route::post('/students/{id}/change-pic', 'StudentsController@changePic');
 Route::post('/students/{id}/join-group', 'StudentsController@joinGroup');
+Route::post('/students/{id}/receive-report', 'StudentsController@receiveReport');
 Route::resource('students', 'StudentsController');
 Route::resource('groups', 'GroupsController');
 
