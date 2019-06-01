@@ -9,11 +9,11 @@ class Lesson extends Model
     public $timestamps = false;
 
     public function group() {
-    	return $this->hasOne('App\Group');
+    	return $this->belongsTo('App\Group');
     }
 
     public function classroom() {
-    	return $this->hasOne('App\Classroom');
+    	return $this->belongsTo('App\Classroom');
     }
 
     // Students who have attended lesson.

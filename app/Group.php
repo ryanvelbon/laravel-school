@@ -14,19 +14,19 @@ class Group extends Model
     ];
 
     public function subject(){
-    	return $this->hasOne('App\Subject');
+    	return $this->belongsTo('App\Subject');
     }
 
     public function level(){
-        return $this->hasOne('App\SubjectLevel');
+        return $this->belongsTo('App\SubjectLevel', 'level_id');
     }
 
     public function tutor(){
-    	return $this->hasOne('App\Tutor');
+    	return $this->belongsTo('App\Tutor');
     }
 
     public function classroom(){
-        return $this->hasOne('App\Classroom');
+        return $this->belongsTo('App\Classroom');
     }
 
     public function students(){
