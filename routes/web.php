@@ -29,6 +29,8 @@ Route::post('/students/{id}/receive-report', 'StudentsController@receiveReport')
 Route::resource('students', 'StudentsController');
 Route::resource('groups', 'GroupsController');
 
+Route::get('/schools', 'SchoolsController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
