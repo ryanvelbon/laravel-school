@@ -28,6 +28,7 @@ Route::post('/students/{id}/join-group', 'StudentsController@joinGroup');
 Route::post('/students/{id}/receive-report', 'StudentsController@receiveReport');
 Route::resource('students', 'StudentsController');
 Route::resource('groups', 'GroupsController');
+Route::resource('assignments', 'AssignmentsController');
 
 Route::get('/schools', 'SchoolsController@index')->name('schools.index');
 

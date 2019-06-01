@@ -9,4 +9,8 @@ class SubjectLevel extends Model
     public function groups(){
     	return $this->hasMany('App\Group', 'level_id');
     }
+
+    public function assignments(){
+    	return $this->hasMany('App\Assignment');
+    }
 }
