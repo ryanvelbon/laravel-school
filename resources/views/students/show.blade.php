@@ -48,11 +48,16 @@
 							    <td>{{App\School::find($student->school_id)->title}}</td>
 							  </tr>
 							  <tr>
-							    <th></td>
-							    <td></td>
+							    <th>Form</td>
+							    <td>@if($student->form == 0)
+							    		Mature Student
+							    	@else
+							    		{{$student->form}}
+							    	@endif
+							    </td>
 							  </tr>
 							  <tr>
-							    <th></td>
+							    <th>Status</td>
 							    <td></td>
 							  </tr>
 							  <tr>

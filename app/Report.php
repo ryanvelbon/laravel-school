@@ -11,6 +11,6 @@ class Report extends Model
 	}
 
 	public function type(){
-		return $this->belongsTo('App\Type');
+		return $this->belongsTo('App\ReportType', 'report_type_id');
 	}
 }

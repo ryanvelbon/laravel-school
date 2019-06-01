@@ -34,7 +34,7 @@ $factory->define(App\Student::class, function (Faker\Generator $faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'sex' => (bool)random_int(0, 1),
-        'form' => random_int(1, 7),
+        'form' => random_int(0, 7),
         'school_id' => App\School::inRandomOrder()->first()->id,
         'email1' => $faker->email,
         'email2' => $faker->email,

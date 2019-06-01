@@ -15,46 +15,55 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">Students</div>
-					<div class="panel-body">
-						<table>
-							<thead>
-								<tr>
-									<th></th>
-									<th>Name</th>
-									<th>Form</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach($group->students as $student)
-								<tr>
-									<td>
-									@if($student->profile_pic)
-										<img height="50" width="50" src="{{asset('storage/profilepics/').'/'.$student->profile_pic}}">
-									@else
-										@if($student->sex)
-											<img height="50" width="50" src="{{asset('storage/profilepics/').'/'.'f.jpg'}}">
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">Students</div>
+						<div class="panel-body">
+							<table>
+								<thead>
+									<tr>
+										<th></th>
+										<th>Name</th>
+										<th>Form</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach($group->students as $student)
+									<tr>
+										<td>
+										@if($student->profile_pic)
+											<img height="50" width="50" src="{{asset('storage/profilepics/').'/'.$student->profile_pic}}">
 										@else
-											<img height="50" width="50" src="{{asset('storage/profilepics/').'/'.'m.jpg'}}">
+											@if($student->sex)
+												<img height="50" width="50" src="{{asset('storage/profilepics/').'/'.'f.jpg'}}">
+											@else
+												<img height="50" width="50" src="{{asset('storage/profilepics/').'/'.'m.jpg'}}">
+											@endif
 										@endif
-									@endif
-									</td>
-									<td><a href="{{ url('/students', $student->id) }}">{{$student->first_name}} {{$student->last_name}}</a></td>
-									<td align="center">{{$student->form}}</td>
-									<td>
-										<div class="progress">
-									        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
-									        aria-valuemin="0" aria-valuemax="100" style="width:40%">
-									          40% Complete (success)
-									        </div>
-									    </div>
-									</td>
-								</tr>	
-								@endforeach
-							</tbody>
-						</table>
+										</td>
+										<td><a href="{{ url('/students', $student->id) }}">{{$student->first_name}} {{$student->last_name}}</a></td>
+										<td align="center">{{$student->form}}</td>
+										<td>
+											<div class="progress">
+										        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+										        aria-valuemin="0" aria-valuemax="100" style="width:40%">
+										          40% Complete (success)
+										        </div>
+										    </div>
+										</td>
+									</tr>	
+									@endforeach
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">Assignments</div>
+						<div class="panel-body">
+						</div>
 					</div>
 				</div>
 			</div>
