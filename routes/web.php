@@ -29,7 +29,7 @@ Route::post('/students/{id}/receive-report', 'StudentsController@receiveReport')
 Route::resource('students', 'StudentsController');
 Route::resource('groups', 'GroupsController');
 
-Route::get('/schools', 'SchoolsController@index');
+Route::get('/schools', 'SchoolsController@index')->name('schools.index');
 
 Auth::routes();
 
