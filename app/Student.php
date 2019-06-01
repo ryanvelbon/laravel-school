@@ -21,4 +21,8 @@ class Student extends Model
     public function reports() {
     	return $this->hasMany('App\Report');
     }
+
+    public function assignments(){
+        return $this->belongsToMany('App\Assignment');
+    }
 }

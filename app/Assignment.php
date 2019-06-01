@@ -15,4 +15,8 @@ class Assignment extends Model
     public function level(){
         return $this->belongsTo('App\SubjectLevel', 'level_id');
     }
+
+    public function students(){
+        return $this->belongsToMany('App\Student');
+    }
 }
