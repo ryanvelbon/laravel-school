@@ -63,6 +63,10 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">Assignments</div>
 						<div class="panel-body">
+							<table>
+								TABLE
+							</table>
+							<a href="{{ route('assignments.assign', $group->id) }}" class="btn btn-primary">Give Students an Assignment</a>
 						</div>
 					</div>
 				</div>

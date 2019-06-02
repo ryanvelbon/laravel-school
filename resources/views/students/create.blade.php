@@ -12,17 +12,6 @@
 	            <form method="post" action="{{ action('StudentsController@store') }}" accept-charset="UTF-8">
 	            	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-
-	            	@if ($errors->any())
-					    <div class="alert alert-danger">
-					        <ul>
-					            @foreach ($errors->all() as $error)
-					                <li>{{ $error }}</li>
-					            @endforeach
-					        </ul>
-					    </div>
-					@endif
-
 					<label for="first-name">First Name</label>
 					<input class="form-control" type="text" name="first-name" id="first-name">
 

@@ -157,6 +157,19 @@
 								<tr>
 									<td>{{App\Subject::find($assignment->subject_id)->title}}</td>
 									<td>{{$assignment_types[$assignment->type]}}</td>
+									<td>{{$assignment->title}}</td>
+									<td>
+										@if($student->assignments()->findOrFail($assignment->id, ['assignment_id'])->pivot->submitted)
+											YES
+											<span class="glyphicon glyphicon-ok-sign"></span>
+										@elseif(date("Y-m-d") > $student->assignments()->findOrFail($assignment->id, ['assignment_id'])->pivot->deadline)
+											NO
+											<span class="glyphicon glyphicon-remove-sign"></span>
+										@else
+											PENDING
+											<span class="glyphicon glyphicon-"></span>
+										@endif
+									</td>
 									<td>
 										<sup>
 											{{$mark = $student->assignments()->findOrFail($assignment->id, ['assignment_id'])->pivot->mark}}
@@ -172,7 +185,7 @@
 											label-danger
 										@endif">
 										{{(int)(($mark/$assignment->marks_available)*100)."%"}}
-									</span></td>
+									</span></td>									
 								</tr>
 								@endforeach
 							</tbody>

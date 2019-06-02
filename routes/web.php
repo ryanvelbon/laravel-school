@@ -28,6 +28,11 @@ Route::post('/students/{id}/join-group', 'StudentsController@joinGroup');
 Route::post('/students/{id}/receive-report', 'StudentsController@receiveReport');
 Route::resource('students', 'StudentsController');
 Route::resource('groups', 'GroupsController');
+
+Route::post('assignments/assign/store', 'AssignmentsController@assignStore')->name('assignments.assign.store'); // is this even necessary???
+Route::get('assignments/assign/{group_id}', 'AssignmentsController@assign')->name('assignments.assign');
+
+
 Route::resource('assignments', 'AssignmentsController');
 
 Route::get('/schools', 'SchoolsController@index')->name('schools.index');
