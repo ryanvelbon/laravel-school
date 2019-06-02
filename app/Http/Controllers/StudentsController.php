@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Config;
 
 
 use App\School;
@@ -73,7 +74,8 @@ class StudentsController extends Controller
         return view('students.show')
             ->with('student', $student)
             ->with('payments', $payments)
-            ->with('groups_not_part_of', $groups_not_part_of);
+            ->with('groups_not_part_of', $groups_not_part_of)
+            ->with('assignment_types', Config::get('constants.assignment_types'));
     }
 
     public function edit($id)

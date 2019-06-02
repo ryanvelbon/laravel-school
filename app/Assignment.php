@@ -17,6 +17,6 @@ class Assignment extends Model
     }
 
     public function students(){
-        return $this->belongsToMany('App\Student');
+        return $this->belongsToMany('App\Student')->withPivot('deadline', 'submitted', 'mark');
     }
 }

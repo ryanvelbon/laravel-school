@@ -145,7 +145,38 @@
 				<div class="panel panel-default">
 					<div class="panel-heading"><h3>Performance</h3></div>
 					<div class="panel-body">
-						bio details
+						<table class="table">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($student->assignments as $assignment)
+								<tr>
+									<td>{{App\Subject::find($assignment->subject_id)->title}}</td>
+									<td>{{$assignment_types[$assignment->type]}}</td>
+									<td>
+										<sup>
+											{{$mark = $student->assignments()->findOrFail($assignment->id, ['assignment_id'])->pivot->mark}}
+										</sup>⁄
+										<sub>
+											{{$assignment->marks_available}}
+										</sub>
+									</td>
+									<td><span class="label 
+										@if($mark > $assignment->pass_mark)
+											label-success
+										@else
+											label-danger
+										@endif">
+										{{(int)(($mark/$assignment->marks_available)*100)."%"}}
+									</span></td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
