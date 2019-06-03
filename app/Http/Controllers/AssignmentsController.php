@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AllahuFoobar;
+
 use App\Assignment;
 use App\Group;
+use App\Subject;
+use App\SubjectLevel;
+use App\AssignmentType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class AssignmentsController extends Controller
 {
@@ -15,12 +21,36 @@ class AssignmentsController extends Controller
 
     public function create()
     {
-        //
+        $subjects = Subject::all();
+        $levels = SubjectLevel::all();
+        $assignment_types = AssignmentType::all();
+
+        return view('assignments.create')
+            ->with('subjects', $subjects)
+            ->with('levels', $levels)
+            ->with('weightings', Config::get('constants.assignment_weightings'))
+            ->with('types', $assignment_types);
     }
 
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+      
+        ]);
+
+        $ass = new Assignment;
+
+        $ass->custom_id = AllahuFoobar::randomAlphanumericId(4);
+        $ass->title = $request->input('title');
+        $ass->assignment_type_id = (int) $request->input('assignment-type');
+        $ass->marks_available = $request->input('marks-available');
+        $ass->pass_mark = $request->input('pass-mark');
+        $ass->subject_id = (int) $request->input('subject');
+        $ass->level_id = (int) $request->input('subject-level');
+
+        $ass->save();
+
+        return redirect('/groups')->with('success', 'Assignment Created');
     }
 
     public function show($id)

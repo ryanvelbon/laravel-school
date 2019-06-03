@@ -22,6 +22,8 @@
 								@endforeach
 							</select>
 
+							<a href="{{route('assignments.create')}}">Cannot find assignment you're looking for? Click here to add it!</a>
+
 							<label for="deadline">Deadline</label>
 							<input type="date" name="deadline" id="deadline">
 

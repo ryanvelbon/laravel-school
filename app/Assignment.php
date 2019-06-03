@@ -16,6 +16,10 @@ class Assignment extends Model
         return $this->belongsTo('App\SubjectLevel', 'level_id');
     }
 
+    public function type(){
+        return $this->belongsTo('App\AssignmentType', 'assignment_type_id');
+    }
+
     public function students(){
         return $this->belongsToMany('App\Student')->withPivot('deadline', 'submitted', 'mark');
     }

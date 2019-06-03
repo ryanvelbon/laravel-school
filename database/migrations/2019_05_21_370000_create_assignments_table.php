@@ -12,7 +12,11 @@ class CreateAssignmentsTable extends Migration
             $table->increments('id');
             $table->string('custom_id', 4);
             $table->string('title', 30);
-            $table->tinyInteger('type');
+
+            $table->unsignedInteger('assignment_type_id');
+            $table->foreign('assignment_type_id')->references('id')->on('assignment_types');
+
+
             $table->tinyInteger('marks_available')->unsigned();
             $table->tinyInteger('pass_mark')->unsigned();
 

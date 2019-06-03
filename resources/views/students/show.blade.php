@@ -156,7 +156,7 @@
 								@foreach($student->assignments as $assignment)
 								<tr>
 									<td>{{App\Subject::find($assignment->subject_id)->title}}</td>
-									<td>{{$assignment_types[$assignment->type]}}</td>
+									<td>{{$assignment->type->title}}</td>
 									<td>{{$assignment->title}}</td>
 									<td>
 										@if($student->assignments()->findOrFail($assignment->id, ['assignment_id'])->pivot->submitted)
