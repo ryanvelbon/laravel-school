@@ -124,7 +124,7 @@
 									</td>
 									<td>
 										@if($lesson->held)
-											69
+											{{$lesson->attendees->count()}}
 										@endif</td>
 									<td><a href="{{ url('/lessons/'.$lesson->id.'/edit') }}" class="btn btn-default btn-sm">Edit</a></td>
 								</tr>
