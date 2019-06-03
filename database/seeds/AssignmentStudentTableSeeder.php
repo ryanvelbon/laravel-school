@@ -4,6 +4,8 @@ use Illuminate\Database\Seeder;
 
 class AssignmentStudentTableSeeder extends Seeder
 {
+	// BUG: 1062 Duplicate entry '33-2' for key 'assignment_student_assignment_id_student_id_unique'
+	
     public function run()
     {
         DB::table('assignment_student')->delete();

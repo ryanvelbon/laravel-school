@@ -22,6 +22,12 @@ class CreateGroupStudentTable extends Migration
                   ->onDelete('cascade');
 
             $table->unique(array('group_id', 'student_id'));
+
+            $table->tinyInteger('reports_count')->unsigned()->nullable();
+            $table->tinyInteger('lessons_count')->unsigned()->nullable();
+            $table->tinyInteger('average_mark')->unsigned()->nullable();
+
+            // 'reports_count', 'lessons_count', 'average_mark'
         });
     }
 

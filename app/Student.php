@@ -11,7 +11,7 @@ class Student extends Model
     }
 
     public function groups() {
-    	return $this->belongsToMany('App\Group');
+    	return $this->belongsToMany('App\Group')->withPivot('reports_count', 'lessons_count', 'average_mark');
     }
 
     public function lessonsAttended(){

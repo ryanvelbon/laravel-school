@@ -30,7 +30,7 @@ class Group extends Model
     }
 
     public function students(){
-        return $this->belongsToMany('App\Student');
+        return $this->belongsToMany('App\Student')->withPivot('reports_count', 'lessons_count', 'average_mark');
     }
 
     public function lessons(){
