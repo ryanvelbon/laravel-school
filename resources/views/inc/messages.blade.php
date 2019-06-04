@@ -5,10 +5,17 @@
 	</div>
 @endif
 
+@if(session('warning'))
+	<div class="alert alert-warning alert-dismissible fade in">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Warning!</strong> {{session('warning')}}
+	</div>
+@endif
+
 @if(session('error'))
 	<div class="alert alert-danger alert-dismissible fade in">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<strong>Success!</strong> {{session('error')}}
+		<strong>Error!</strong> {{session('error')}}
 	</div>
 @endif
 
