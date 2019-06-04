@@ -9,6 +9,7 @@ use App\Tutor;
 use App\SubjectLevel;
 use App\Classroom;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class GroupsController extends Controller
 {
@@ -62,9 +63,25 @@ class GroupsController extends Controller
     public function show($id)
     {
         $group = Group::find($id);
+
+        $students_with_stats = DB::table('group_student')
+                                    ->where('group_id', $id)
+                                    ->orderBy('average_mark', 'desc')
+                                    ->join('students', 'students.id', '=', 'group_student.student_id')
+                                    ->select('students.id', 'students.first_name', 'students.last_name', 
+                                            'students.sex', 'students.form', 'students.school_id', 
+                                            'students.profile_pic', 'group_student.reports_count', 
+                                            'group_student.lessons_count', 'group_student.average_mark')
+                                    ->get();
+
+        // $ass_st_records = DB::table('assignment_student')
+        //         ->join('assignments', 'assignment_student.assignment_id', '=', 'assignments.id')
+        //         ->select('assignment_student.student_id', 'assignment_student.submitted', 'assignment_student.mark', 'assignments.marks_available', 'assignments.subject_id', 'assignments.level_id')
+        //         ->get();
         
         return view('groups.show')
             ->with('group', $group)
+            ->with('students_with_stats', $students_with_stats)
             ->with('weekdays', Config::get('constants.weekdays'));
     }
 

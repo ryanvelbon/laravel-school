@@ -29,7 +29,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($group->students as $student)
+									@foreach($students_with_stats as $student)
 									<tr>
 										<td>
 										@if($student->profile_pic)
@@ -47,8 +47,9 @@
 										<td>
 											<div class="progress">
 										        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
-										        aria-valuemin="0" aria-valuemax="100" style="width:40%">
-										          40% Complete (success)
+										        aria-valuemin="0" aria-valuemax="100" style="width:{{$student->average_mark}}%">
+										          {{$student->average_mark}}
+										          % ----------------------
 										        </div>
 										    </div>
 										</td>
