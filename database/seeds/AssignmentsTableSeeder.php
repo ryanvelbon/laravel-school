@@ -22,7 +22,7 @@ class AssignmentsTableSeeder extends Seeder
 			foreach($levels as $level){
 				for($i=0; $i<random_int(0,20); $i++){
 
-					$custom_id = AllahuFoobar::randomAlphanumericId(4);
+					$custom_id = AllahuFoobar::random_alphanumeric_id(4);
 					$title = "Lorem Ipsum";
 					$assignment_type = App\AssignmentType::inRandomOrder()->first();
 					$marks_available = $weights[array_rand($weights)];

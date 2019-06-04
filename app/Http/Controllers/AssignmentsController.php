@@ -42,7 +42,7 @@ class AssignmentsController extends Controller
 
         $ass = new Assignment;
 
-        $ass->custom_id = AllahuFoobar::randomAlphanumericId(4);
+        $ass->custom_id = AllahuFoobar::random_alphanumeric_id(4);
         $ass->title = $request->input('title');
         $ass->assignment_type_id = (int) $request->input('assignment-type');
         $ass->marks_available = $request->input('marks-available');

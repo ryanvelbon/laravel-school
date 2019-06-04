@@ -3,7 +3,7 @@ namespace App\Helpers;
 
 class AllahuFoobar
 {
-	public static function randomAlphanumericId($length){
+	public static function random_alphanumeric_id($length){
 
 		$str = "";
     	
