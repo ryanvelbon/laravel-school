@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+	<link rel="stylesheet" href="{{ asset('css/groups/show.css') }}">
+@endsection
+
 @section('content')
 	<div class="jumbotron text-center">
 		<h1>Group {{$group->custom_id}}</h1>
@@ -14,7 +18,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-5">
 				<div class="row">
 					<div class="panel panel-default">
 						<div class="panel-heading">Students</div>
@@ -25,7 +29,7 @@
 										<th></th>
 										<th>Name</th>
 										<th>Form</th>
-										<th></th>
+										<th>Overall Assessment</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -49,7 +53,7 @@
 										        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
 										        aria-valuemin="0" aria-valuemax="100" style="width:{{$student->average_mark}}%">
 										          {{$student->average_mark}}
-										          % ----------------------
+										          %
 										        </div>
 										    </div>
 										</td>
@@ -72,7 +76,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-sm-7">
 				<div class="panel panel-default">
 					<div class="panel-heading">Lessons</div>
 					<div class="panel-body">
@@ -84,8 +88,7 @@
 									<th>Starts</th>
 									<th>Ends</th>
 									<th>Room</th>
-									<th>Description</th>
-									<th><!--  Status  --></th>
+									<th><!--  Description  --></th>
 									<th>Turn-Out</th>
 									<th><!--Edit Buttons--></th>
 								</tr>
@@ -109,10 +112,14 @@
 									<td>@php echo date('H:i', strtotime($lesson->starts)); @endphp</td>
 									<td>@php echo date('H:i', strtotime($lesson->ends)); @endphp</td>
 									<td>{{App\Classroom::find($lesson->classroom_id)->room_number}}</td>
-									<td>@php echo  substr($lesson->description, 0, 30); @endphp</td>
+									<td>
+										@if($lesson->description)
+											<a href="#" data-toggle="tooltip" title="{{substr($lesson->description, 0, 100)}}">Read!</a>
+										@endif
+									</td>
 									<td>
 										@if($lesson->held)
-											x
+											{{$lesson->attendees->count()}}
 										@else
 											<form
 												name="lesson-complete" 
@@ -123,10 +130,6 @@
 											</form>
 										@endif
 									</td>
-									<td>
-										@if($lesson->held)
-											{{$lesson->attendees->count()}}
-										@endif</td>
 									<td><a href="{{ url('/lessons/'.$lesson->id.'/edit') }}" class="btn btn-default btn-sm">Edit</a></td>
 								</tr>
 								@endforeach
@@ -137,4 +140,12 @@
 			</div>
 		</div>
 	</div>
+@endsection
+
+@section('scripts')
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>
 @endsection

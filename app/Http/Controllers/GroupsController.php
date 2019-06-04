@@ -73,11 +73,6 @@ class GroupsController extends Controller
                                             'students.profile_pic', 'group_student.reports_count', 
                                             'group_student.lessons_count', 'group_student.average_mark')
                                     ->get();
-
-        // $ass_st_records = DB::table('assignment_student')
-        //         ->join('assignments', 'assignment_student.assignment_id', '=', 'assignments.id')
-        //         ->select('assignment_student.student_id', 'assignment_student.submitted', 'assignment_student.mark', 'assignments.marks_available', 'assignments.subject_id', 'assignments.level_id')
-        //         ->get();
         
         return view('groups.show')
             ->with('group', $group)
