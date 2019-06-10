@@ -131,6 +131,11 @@
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<input type="number" name="amount" id="amount">
 									<input type="date" name="payment-date" id="payment-date">
+									<select class="form-control" name="payment-group" id="payment-group">
+									@foreach($student->groups as $group)
+										<option value="{{$group->id}}">{{$group->custom_id}}</option>
+									@endforeach
+									</select>
 									<input type="submit" value="Submit" class="btn btn-primary">
 							</form>
 							
@@ -290,6 +295,68 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h3>Interactions</h3></div>
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Method of Communication</th>
+								<th>Interlocutor</th>
+								<th>Text</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($student->interactions as $interaction)
+							<tr>
+								<td>{{$interaction->date}}</td>
+								<td>{{App\InteractionType::find($interaction->interaction_type_id)->title}}</td>
+								@if($interaction->with_parent)
+									<td>with parent</td>
+								@else
+									<td>with student</td>
+								@endif
+								<td>{{$interaction->text}}</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+
+					<div id="interactionForm" style="display: none;">
+						<form
+							name="record-interaction" 
+							method="post" 
+							action="{{ action('InteractionsController@store') }}">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+								<input type="hidden" name="student-id" value="{{ $student->id }}">
+								
+								<label for="interaction-type">Record Interaction</label>
+								<select class="form-control" name="interaction-type" id="interaction-type">
+									@foreach(App\InteractionType::all() as $interaction_type)
+										<option value="{{$interaction_type->id}}">{{$interaction_type->title}}</option>
+									@endforeach
+								</select>
+
+								<input type="checkbox" name="with-parent" id="with-parent">
+
+								<input type="text" name="text" id="text">
+
+								<input type="date" name="interaction-date" id="interaction-date">
+
+								<input type="submit" value="Submit" class="btn btn-primary">
+						</form>
+						
+					</div>
+
+					<a onclick="toggleDisplayOfInteractionForm()" class="btn btn-default pull-right" id="recordInteractionBtn">Record Interaction</a>
+				</div>
+			</div>
+		</div>
+
 	</div>
 
 @endsection
@@ -349,5 +416,26 @@
 			btn.innerHTML = "Make Report";
 		}
 	}
+
+	function toggleDisplayOfInteractionForm() {
+
+		// Selects today's date as default
+		document.querySelector("#interaction-date").valueAsDate = new Date();
+		
+		var form = document.getElementById("interactionForm");
+		var btn = document.getElementById("recordInteractionBtn");
+
+		if (form.style.display === "none") {
+			form.style.display = "block";
+			// btn.class = "btn btn-danger";
+			btn.innerHTML = "Cancel";
+		} else {
+			form.style.display = "none";
+			// btn.class = "btn btn-default";
+			btn.innerHTML = "Record Interaction";
+		}
+	}
+
+
 </script>
 @endsection

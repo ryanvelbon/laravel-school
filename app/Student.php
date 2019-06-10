@@ -22,6 +22,10 @@ class Student extends Model
     	return $this->hasMany('App\Report');
     }
 
+    public function interactions() {
+        return $this->hasMany('App\Interaction');
+    }
+
     public function payments() {
         return $this->hasMany('App\Payment');
     }

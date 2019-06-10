@@ -19,7 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/make-payment/{student_id}', 'PaymentsController@store');
 Route::post('/lessons/{id}/update-status', 'LessonsController@updateStatus');
 Route::get('/lessons/{id}/mark-attendance', 'LessonsController@markAttendance');
 Route::post('/lessons/{id}/store-attendance', 'LessonsController@storeAttendance');
@@ -28,6 +27,9 @@ Route::post('/students/{id}/join-group', 'StudentsController@joinGroup');
 Route::post('/students/{id}/receive-report', 'StudentsController@receiveReport');
 Route::resource('students', 'StudentsController');
 Route::resource('groups', 'GroupsController');
+
+Route::post('/make-payment/{student_id}', 'PaymentsController@store');
+Route::post('/interactions', 'InteractionsController@store')->name('interactions.store');
 
 Route::post('assignments/assign/store', 'AssignmentsController@assignStore')->name('assignments.assign.store'); // is this even necessary???
 Route::get('assignments/assign/{group_id}', 'AssignmentsController@assign')->name('assignments.assign');
