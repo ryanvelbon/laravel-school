@@ -22,6 +22,10 @@ class Student extends Model
     	return $this->hasMany('App\Report');
     }
 
+    public function payments() {
+        return $this->hasMany('App\Payment');
+    }
+
     public function assignments(){
         return $this->belongsToMany('App\Assignment')->withPivot('deadline', 'submitted', 'mark');
     }

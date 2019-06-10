@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(StudentsTableSeeder::class);
         $this->call(GroupStudentTableSeeder::class);
         $this->call(LessonsTableSeeder::class);
+        // pending : attendance table seeder
+        // $this->call(PaymentsTableSeeder::class);
         $this->call(AssignmentTypesTableSeeder::class);
         $this->call(AssignmentsTableSeeder::class);
         $this->call(AssignmentStudentTableSeeder::class);

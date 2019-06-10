@@ -13,6 +13,8 @@ class CreatePaymentsTable extends Migration
 
             $table->unsignedInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students');
+            $table->unsignedInteger('group_id');
+            $table->foreign('group_id')->references('id')->on('groups');
             $table->smallInteger('amount');
             $table->date('date');
 
